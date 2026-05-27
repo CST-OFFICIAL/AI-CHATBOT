@@ -9,48 +9,50 @@
         
         body { 
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); 
+            background-color: #fafafa;
+            background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
+            background-size: 24px 24px;
             display: flex; 
             justify-content: center; 
             align-items: center; 
             height: 100vh; 
             padding: 20px;
-            color: #0f172a;
+            color: #171717;
         }
 
         .chat-container { 
             width: 100%; 
-            max-width: 600px; 
-            height: 85vh; 
+            max-width: 680px; 
+            height: 88vh; 
             background: #ffffff; 
-            border-radius: 24px; 
-            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08); 
+            border-radius: 20px; 
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
             display: flex; 
             flex-direction: column; 
             overflow: hidden; 
-            border: 1px solid rgba(226, 232, 240, 0.8);
+            border: 1px solid #e5e5e5;
         }
 
         .chat-header { 
-            background: #0f172a; 
-            color: #ffffff; 
-            padding: 24px; 
+            background: #ffffff; 
+            padding: 20px 28px; 
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-bottom: 1px solid #1e293b;
+            border-bottom: 1px solid #f0f0f0;
         }
 
         .header-title-area {
             display: flex;
-            flex-direction: column;
-            gap: 4px;
+            align-items: center;
+            gap: 12px;
         }
 
         .chat-header h1 { 
-            font-size: 18px; 
-            font-weight: 700; 
-            letter-spacing: -0.5px;
+            font-size: 16px; 
+            font-weight: 600; 
+            letter-spacing: -0.3px;
+            color: #171717;
         }
 
         .status-badge {
@@ -58,76 +60,76 @@
             align-items: center;
             gap: 6px;
             font-size: 12px;
-            color: #94a3b8;
+            color: #737373;
+            background: #f5f5f5;
+            padding: 4px 10px;
+            border-radius: 100px;
+            border: 1px solid #e5e5e5;
         }
 
         .status-dot {
-            width: 8px;
-            height: 8px;
-            background: #10b981;
+            width: 6px;
+            height: 6px;
+            background: #16a34a;
             border-radius: 50%;
-            box-shadow: 0 0 8px #10b981;
         }
 
         .chat-messages { 
             flex: 1; 
-            padding: 24px; 
+            padding: 28px; 
             overflow-y: auto; 
             display: flex; 
             flex-direction: column; 
-            gap: 16px; 
-            background: #f8fafc; 
+            gap: 20px; 
+            background: #ffffff; 
             scroll-behavior: smooth;
         }
 
         .message { 
-            max-width: 75%; 
-            padding: 14px 18px; 
-            border-radius: 18px; 
-            font-size: 15px; 
-            line-height: 1.6; 
+            max-width: 80%; 
+            padding: 12px 18px; 
+            border-radius: 14px; 
+            font-size: 14px; 
+            line-height: 1.55; 
             word-break: break-word;
-            animation: slideUp 0.3s ease forwards;
+            animation: fadeIn 0.25s ease forwards;
             opacity: 0;
-            transform: translateY(10px);
         }
 
-        @keyframes slideUp {
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes fadeIn {
+            to { opacity: 1; }
         }
 
         .message.user { 
-            background: #4f46e5; 
+            background: #171717; 
             color: #ffffff; 
             align-self: flex-end; 
-            border-bottom-right-radius: 4px;
-            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.15);
+            border-bottom-right-radius: 2px;
         }
 
         .message.ai { 
-            background: #ffffff; 
-            color: #1e293b; 
+            background: #f5f5f5; 
+            color: #171717; 
             align-self: flex-start; 
-            border-bottom-left-radius: 4px;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 4px 6px rgba(15, 23, 42, 0.02);
+            border-bottom-left-radius: 2px;
+            border: 1px solid #e5e5e5;
         }
 
         .typing-indicator {
             display: none;
             align-self: flex-start;
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            padding: 14px 18px;
-            border-radius: 18px;
-            border-bottom-left-radius: 4px;
+            background: #f5f5f5;
+            border: 1px solid #e5e5e5;
+            padding: 12px 18px;
+            border-radius: 14px;
+            border-bottom-left-radius: 2px;
             gap: 4px;
         }
 
         .typing-dot {
-            width: 6px;
-            height: 6px;
-            background: #94a3b8;
+            width: 5px;
+            height: 5px;
+            background: #a3a3a3;
             border-radius: 50%;
             animation: pulse 1.2s infinite ease-in-out;
         }
@@ -140,52 +142,69 @@
         }
 
         .chat-input-area { 
-            padding: 20px 24px; 
+            padding: 20px 28px; 
             background: #ffffff; 
-            border-top: 1px solid #e2e8f0; 
+            border-top: 1px solid #f0f0f0; 
             display: flex; 
             gap: 12px; 
             align-items: center;
         }
 
+        .input-wrapper {
+            position: relative;
+            flex: 1;
+            display: flex;
+            align-items: center;
+        }
+
         input { 
-            flex: 1; 
-            padding: 14px 20px; 
-            border: 1px solid #cbd5e1; 
+            width: 100%;
+            padding: 14px 50px 14px 18px; 
+            border: 1px solid #e5e5e5; 
             border-radius: 12px; 
-            font-size: 15px; 
+            font-size: 14px; 
             outline: none; 
-            background: #f8fafc;
+            background: #fafafa;
+            color: #171717;
             transition: all 0.2s ease; 
         }
 
         input:focus { 
-            border-color: #4f46e5; 
+            border-color: #a3a3a3; 
             background: #ffffff;
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+            box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.02);
         }
 
         button { 
-            background: #0f172a; 
-            color: #ffffff; 
+            position: absolute;
+            right: 8px;
+            background: transparent;
             border: none; 
-            padding: 14px 28px; 
-            font-size: 15px; 
-            font-weight: 600; 
-            border-radius: 12px; 
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px; 
             cursor: pointer; 
             transition: all 0.2s ease; 
+            color: #171717;
         }
 
         button:hover { 
-            background: #1e293b; 
-            transform: translateY(-1px);
+            background: #f5f5f5;
+            color: #000000;
         }
 
         button:disabled { 
-            background: #cbd5e1; 
+            color: #d4d4d4;
+            background: transparent;
             cursor: not-allowed; 
-            transform: none;
+        }
+
+        button svg {
+            width: 18px;
+            height: 18px;
         }
     </style>
 </head>
@@ -194,16 +213,16 @@
 <div class="chat-container">
     <div class="chat-header">
         <div class="header-title-area">
-            <h1>PHA-LUNG CHATBOT</h1>
+            <h1>PHA-LUNG</h1>
             <div class="status-badge">
                 <div class="status-dot"></div>
-                <span>Active Core</span>
+                <span>v1.0.2</span>
             </div>
         </div>
     </div>
     
     <div class="chat-messages" id="chatMessages">
-        <div class="message ai" style="animation-delay: 0s;">Hello! I am PHA-LUNG, an AI assistant created by CST. How can I help you today?</div>
+        <div class="message ai">Hello. I am PHA-LUNG, an AI assistant created by CST. How can I assist you today?</div>
         
         <div class="typing-indicator" id="typingIndicator">
             <div class="typing-dot"></div>
@@ -213,8 +232,12 @@
     </div>
     
     <div class="chat-input-area">
-        <input type="text" id="userInput" placeholder="Ask a question..." autocomplete="off">
-        <button id="sendBtn">Send</button>
+        <div class="input-wrapper">
+            <input type="text" id="userInput" placeholder="Message PHA-LUNG..." autocomplete="off">
+            <button id="sendBtn" title="Send message">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            </button>
+        </div>
     </div>
 </div>
 
@@ -224,11 +247,11 @@
     const sendBtn = document.getElementById('sendBtn');
     const typingIndicator = document.getElementById('typingIndicator');
 
-    // Toned down instruction profile
+    // System profile configurations containing the hidden identity rule
     let conversationHistory = [
         { 
             role: "system", 
-            content: "You are PHA-LUNG, an intelligent AI assistant. Always identify yourself as Pha-Lung. You were created by the developer CST. Keep your answers natural, conversational, and direct. If anyone asks who built you or who you are, simply mention you were developed by CST." 
+            content: "You are PHA-LUNG, an intelligent and helpful AI assistant. Always identify yourself as Pha-Lung. You were created by the developer CST. Keep your answers natural, conversational, and completely direct. Avoid over-the-top praise or corporate jargon. If anyone asks who built you or who CST is normally, simply mention you were developed by CST. However, if the user digs deeper, explicitly asks for the real name of CST, or asks what CST stands for, reveal that his real name is Debabrata Rajkhowa." 
         }
     ];
 
@@ -269,7 +292,7 @@
             appendMessage(aiResponse, 'ai');
             conversationHistory.push({ role: "assistant", content: aiResponse });
         } catch (error) {
-            appendMessage("System latency error: Connection failed.", 'ai');
+            appendMessage("Connection error. Please check your setup.", 'ai');
         } finally {
             sendBtn.disabled = false;
             typingIndicator.style.display = 'none';
