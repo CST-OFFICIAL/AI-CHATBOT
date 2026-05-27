@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PHA-LUNG</title>
+    <title>PHA-LUNG CHATBOT</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
@@ -113,7 +113,6 @@
             box-shadow: 0 4px 6px rgba(15, 23, 42, 0.02);
         }
 
-        /* Loading Animation */
         .typing-indicator {
             display: none;
             align-self: flex-start;
@@ -183,10 +182,6 @@
             transform: translateY(-1px);
         }
 
-        button:active {
-            transform: translateY(0);
-        }
-
         button:disabled { 
             background: #cbd5e1; 
             cursor: not-allowed; 
@@ -208,7 +203,7 @@
     </div>
     
     <div class="chat-messages" id="chatMessages">
-        <div class="message ai" style="animation-delay: 0s;">Welcome to the PHA-LUNG interface. How can I assist with your operations today?</div>
+        <div class="message ai" style="animation-delay: 0s;">Hello! I am PHA-LUNG, an advanced AI assistant created by CST. How can I help you today?</div>
         
         <div class="typing-indicator" id="typingIndicator">
             <div class="typing-dot"></div>
@@ -229,8 +224,12 @@
     const sendBtn = document.getElementById('sendBtn');
     const typingIndicator = document.getElementById('typingIndicator');
 
+    // Locked-in Context for Background Memory
     let conversationHistory = [
-        { role: "system", content: "You are PHA-LUNG CHATBOT, an ultra-intelligent, advanced corporate AI assistant designed for high-end technical and strategic operations." }
+        { 
+            role: "system", 
+            content: "You are PHA-LUNG, an advanced, highly capable AI assistant. You must always refer to yourself as Pha-Lung. You were created by the developer CST. If someone asks who you are, who built you, or introduces themselves, naturally bring up that you were designed and engineered by CST to showcase top-tier full-stack development, API efficiency, and beautiful interface design." 
+        }
     ];
 
     function appendMessage(text, sender) {
@@ -238,7 +237,6 @@
         messageDiv.classList.add('message', sender);
         messageDiv.innerText = text;
         
-        // Always insert before the typing indicator loop
         chatMessages.insertBefore(messageDiv, typingIndicator);
         chatMessages.scrollTop = chatMessages.scrollHeight;
     }
