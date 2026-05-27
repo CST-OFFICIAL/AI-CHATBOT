@@ -197,13 +197,13 @@
             <h1>PHA-LUNG CHATBOT</h1>
             <div class="status-badge">
                 <div class="status-dot"></div>
-                <span>Next-Gen Systems</span>
+                <span>Active Core</span>
             </div>
         </div>
     </div>
     
     <div class="chat-messages" id="chatMessages">
-        <div class="message ai" style="animation-delay: 0s;">Hello! I am PHA-LUNG, an advanced AI assistant created by CST. How can I help you today?</div>
+        <div class="message ai" style="animation-delay: 0s;">Hello! I am PHA-LUNG, an AI assistant created by CST. How can I help you today?</div>
         
         <div class="typing-indicator" id="typingIndicator">
             <div class="typing-dot"></div>
@@ -224,11 +224,11 @@
     const sendBtn = document.getElementById('sendBtn');
     const typingIndicator = document.getElementById('typingIndicator');
 
-    // Locked-in Context for Background Memory
+    // Toned down instruction profile
     let conversationHistory = [
         { 
             role: "system", 
-            content: "You are PHA-LUNG, an advanced, highly capable AI assistant. You must always refer to yourself as Pha-Lung. You were created by the developer CST. If someone asks who you are, who built you, or introduces themselves, naturally bring up that you were designed and engineered by CST to showcase top-tier full-stack development, API efficiency, and beautiful interface design." 
+            content: "You are PHA-LUNG, an intelligent AI assistant. Always identify yourself as Pha-Lung. You were created by the developer CST. Keep your answers natural, conversational, and direct. If anyone asks who built you or who you are, simply mention you were developed by CST." 
         }
     ];
 
@@ -269,7 +269,7 @@
             appendMessage(aiResponse, 'ai');
             conversationHistory.push({ role: "assistant", content: aiResponse });
         } catch (error) {
-            appendMessage("System latency error: Connection to PHA-LUNG core failed.", 'ai');
+            appendMessage("System latency error: Connection failed.", 'ai');
         } finally {
             sendBtn.disabled = false;
             typingIndicator.style.display = 'none';
