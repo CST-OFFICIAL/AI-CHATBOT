@@ -136,7 +136,7 @@
             flex-direction: row;
         }
 
-        /* Right Split (User Alignment) */
+        /* Right Split (User Alignment Fixed) */
         .message-row.user {
             flex-direction: row-reverse; 
             justify-content: flex-start; 
@@ -201,6 +201,7 @@
             background: var(--bg-user-bubble); 
             color: var(--text-user-bubble); 
             border-top-right-radius: 2px;
+            text-align: left;
         }
 
         .message strong { font-weight: 600; color: inherit; }
@@ -303,7 +304,7 @@
             </div>
             <div class="message-content-block">
                 <span class="sender-tag">PHA-LUNG</span>
-                <div class="message">Hello. I am PHA-LUNG, an AI assistant created by CST. How can I assist you today?</div>
+                <div class="message">Hello. I am PHA-LUNG, an AI assistant built inside this workspace. How can I help you today?</div>
             </div>
         </div>
         
@@ -338,8 +339,8 @@
     const sendBtn = document.getElementById('sendBtn');
     const typingRow = document.getElementById('typingRow');
 
-    // FIXED SYSTEM PROMPT: Removed the aggressive "Always introduce yourself" loop
- let conversationHistory = [
+    // MUST USE 'LET' FOR MEMORY SLICING TO WORK APART FROM CRASHES
+    let conversationHistory = [
         { 
             role: "system", 
             content: "You are PHA-LUNG, a chill, intelligent AI assistant inside this chat workspace. Keep your tone natural, direct, and relaxed. Follow these strict information levels:\n\nLEVEL 1 - SELF INTRODUCTION: If asked to introduce yourself or 'who are you', ONLY talk about yourself. Say you are PHA-LUNG, an AI helper here to chat or brainstorm. Do NOT mention CST, do NOT mention who built you, and do NOT give any background history.\n\nLEVEL 2 - THE CREATOR (Only if asked 'Who built you?' or 'How was this made?'): State casually that this custom workspace and layout was designed and built by the developer CST using modern dev workflows, and you are the AI API integrated into it. Do NOT mention a real name here.\n\nLEVEL 3 - DEEP DIGGING (Only if asked 'Who is CST?', 'What does CST stand for?', or for a real name): Reveal that his real name is Debabrata Rajkhowa. Otherwise, never mention this name." 
@@ -388,41 +389,15 @@
         typingRow.style.display = 'flex';
         chatMessages.scrollTop = chatMessages.scrollHeight;
 
-        // Add the new user message to the history
         conversationHistory.push({ role: "user", content: text });
 
-        // 🧠 MEMORY MANAGEMENT: Keep system prompt + the last 12 messages max
-        // This stops the chat from getting bloated, prevents timeouts, and keeps it fast!
+        // Rolling memory window protection to avoid 10-minute timeout drops
         if (conversationHistory.length > 13) {
             conversationHistory = [
-                conversationHistory[0],          // Lock the system instructions in place
-                ...conversationHistory.slice(-12) // Only keep the most recent 12 messages
+                conversationHistory[0],
+                ...conversationHistory.slice(-12)
             ];
         }
-
-        try {
-            const response = await fetch("/api/chat", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ messages: conversationHistory })
-            });
-
-            const data = await response.json();
-            if (!response.ok) throw new Error(data.error || "Server Error");
-
-            const aiResponse = data.choices[0].message.content;
-            appendMessage(aiResponse, 'ai');
-            conversationHistory.push({ role: "assistant", content: aiResponse });
-        } catch (error) {
-            appendMessage("API connection dropped. Please check deployment settings.", 'ai');
-        } finally {
-            sendBtn.disabled = false;
-            typingRow.style.display = 'none';
-        }
-    }
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-
-        conversationHistory.push({ role: "user", content: text });
 
         try {
             const response = await fetch("/api/chat", {
