@@ -63,7 +63,7 @@
             transition: background-color 0.3s ease;
         }
 
-        /* Clean, Focused Centerpiece Workspace Layout */
+        /* Clean Centerpiece Workspace Layout */
         .chat-frame { 
             width: 100%; 
             max-width: 840px; 
@@ -130,15 +130,16 @@
         }
         @keyframes cleanEntry { to { opacity: 1; transform: translateY(0); } }
 
-        /* Left Split (AI) */
+        /* Left Split (AI Alignment) */
         .message-row.ai {
             justify-content: flex-start;
+            flex-direction: row;
         }
 
-        /* Right Split (User) */
+        /* Right Split (Corrected User Alignment) */
         .message-row.user {
-            justify-content: flex-end;
-            flex-direction: row-reverse; /* Places user avatar correctly on the right edge */
+            flex-direction: row-reverse; 
+            justify-content: flex-start; /* Locks the reversed row tightly to the right wall */
         }
 
         /* Premium SVG Avatar Nodes */
