@@ -57,14 +57,13 @@
             transition: background-color 0.3s ease;
         }
 
-        /* Main Desktop App Shell Split Layout */
         .app-container {
             display: flex;
             width: 100vw;
             height: 100vh;
         }
 
-        /* Sidebar Navigation Component (SaaS Standard) */
+        /* Sidebar Navigation Component */
         .sidebar {
             width: var(--sidebar-width);
             background-color: var(--bg-sidebar);
@@ -77,7 +76,7 @@
         }
 
         @media (max-width: 768px) {
-            .sidebar { display: none; } /* Adaptive scaling for mobile viewports */
+            .sidebar { display: none; } 
         }
 
         .new-chat-btn {
@@ -117,9 +116,6 @@
             padding: 8px 12px;
             border-radius: 6px;
             cursor: pointer;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
         }
         .history-item.active {
             background: var(--chat-user-bg);
@@ -135,7 +131,7 @@
             gap: 8px;
         }
 
-        /* Main Workspace Interface Cascade */
+        /* Main Workspace Interface */
         .workspace {
             flex: 1;
             display: flex;
@@ -144,7 +140,6 @@
             position: relative;
         }
 
-        /* Top Bar Interface Navigation */
         .workspace-header {
             padding: 18px 40px;
             border-bottom: 1px solid var(--border-main);
@@ -156,7 +151,6 @@
             font-size: 15px;
             font-weight: 600;
             color: var(--text-title);
-            letter-spacing: -0.01em;
         }
 
         .status-pill {
@@ -174,30 +168,40 @@
             border-radius: 50%;
         }
 
-        /* Spacious Document-Style Messaging Stream */
+        /* Dynamic Message Stream Configuration */
         .chat-messages {
             flex: 1;
             overflow-y: auto;
-            padding: 40px 0;
+            padding: 40px 24px;
             display: flex;
             flex-direction: column;
             width: 100%;
-            max-width: 720px;
+            max-width: 800px;
             margin: 0 auto;
-            gap: 36px;
+            gap: 32px;
         }
-        .chat-messages::-webkit-scrollbar { width: 0px; } /* Completely hidden scrollbar tracks */
+        .chat-messages::-webkit-scrollbar { width: 0px; } 
 
         .message-row {
             display: flex;
-            gap: 24px;
+            gap: 20px;
             width: 100%;
-            padding: 0 24px;
             opacity: 0;
             transform: translateY(16px);
             animation: appEntry 0.5s var(--ease-premium) forwards;
         }
         @keyframes appEntry { to { opacity: 1; transform: translateY(0); } }
+
+        /* Left-Side AI Alignment */
+        .message-row.ai {
+            justify-content: flex-start;
+        }
+
+        /* Right-Side User Alignment */
+        .message-row.user {
+            justify-content: flex-end;
+            flex-direction: row-reverse; /* Pushes user avatar to the far right */
+        }
 
         .avatar-frame {
             width: 28px;
@@ -218,14 +222,18 @@
             background: var(--border-strong);
             color: var(--text-title);
         }
-        .avatar-frame svg { width: 15px; height: 15px; }
 
         .message-body-wrapper {
             display: flex;
             flex-direction: column;
             gap: 6px;
-            flex: 1;
+            max-width: 75%;
         }
+
+        /* Alignment adjustment inside text container blocks */
+        .message-row.ai .message-body-wrapper { align-items: flex-start; }
+        .message-row.user .message-body-wrapper { align-items: flex-end; }
+
         .identity-label {
             font-size: 12px;
             font-weight: 600;
@@ -239,28 +247,29 @@
             color: var(--text-body);
         }
 
-        /* Clean user container distinction instead of a goofy blue box */
+        /* Clean modern capsule formatting for the User on the right side */
         .message-row.user .message {
-            padding: 12px 16px;
+            padding: 12px 18px;
             background: var(--chat-user-bg);
             color: var(--chat-user-text);
-            border-radius: 12px;
-            display: inline-block;
-            align-self: flex-start;
+            border-radius: 16px;
+            border-top-right-radius: 2px; /* Precision styling tail */
+            text-align: left;
         }
-        .message-row.user {
-            justify-content: flex-start;
+
+        /* Clean layout flow formatting for AI on the left side */
+        .message-row.ai .message {
+            padding: 4px 0;
         }
 
         .message strong { font-weight: 600; color: var(--text-title); }
         .message br { content: ""; display: block; margin-bottom: 10px; }
 
-        /* Document-Flow Integrated Typist Framework */
+        /* Typist Positioning Matrix */
         .typing-row {
             display: none;
-            gap: 24px;
+            gap: 20px;
             width: 100%;
-            padding: 0 24px;
         }
         .typing-indicator {
             display: flex;
@@ -279,7 +288,7 @@
         .typing-dot:nth-child(3) { animation-delay: 0.3s; }
         @keyframes saasPulse { 0%, 100% { opacity: 0.3; transform: scale(0.9); } 50% { opacity: 1; transform: scale(1.1); } }
 
-        /* Floating Studio Command Console Bar */
+        /* Main Workspace Control Deck Entry Frame */
         .chat-input-area {
             padding: 24px 24px 40px 24px;
             width: 100%;
